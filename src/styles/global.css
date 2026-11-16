@@ -1212,7 +1212,8 @@ section {
   }
 
   .bar-sections {
-    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
   }
 
   .sticky-bar .bar-actions a {
@@ -1240,9 +1241,9 @@ section {
   }
 }
 
-/* Through 480px CTA rows use one equal-width track per button so 400–428px
-   viewports no longer produce ragged, unequal pills. */
-@media (width <= 480px) {
+/* Through 879px CTA rows use one equal-width track per button so phones and
+   tablets never produce ragged, unequal pills. */
+@media (width <= 879px) {
   .btn-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
