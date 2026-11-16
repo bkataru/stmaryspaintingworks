@@ -75,6 +75,10 @@
   --shadow-wa: 0 4px 14px rgb(10 79 168 / 0.3);
   --shadow-wa-lift: 0 6px 20px rgb(10 79 168 / 0.35);
   --header-h: 64px;
+
+  /* Height of the docked quick-contact bar, excluding the bottom safe-area
+     inset. Mirrored by body padding so the bar never covers content. */
+  --dock-h: 112px;
   --z-header: 10;
   --z-bar: 20;
 
@@ -123,10 +127,14 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--color-foreground);
   background: var(--color-background);
+
+  /* The quick-contact bar is edge-to-edge below 880px. Reserve its height so
+     no section, caption or footer line can be hidden behind the dock. */
+  padding-bottom: calc(var(--dock-h) + env(safe-area-inset-bottom));
 }
 
 h1,
@@ -139,19 +147,19 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(28px, 4.5vw, 40px);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: clamp(1.5rem, 4vw, 2.125rem);
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 h3 {
-  font-size: 19px;
+  font-size: 1.1875rem;
   font-weight: 600;
 }
 
@@ -206,7 +214,19 @@ a:not(.btn):focus-visible,
 .wrap {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-right: calc(20px + env(safe-area-inset-right));
+}
+
+/* Grid children keep min-width:auto by default; long labels would then widen
+   the whole track and create horizontal scroll at high zoom. */
+.steps > li,
+.service-groups > .service-group,
+.gallery-grid > figure,
+.gallery-feature > figure,
+.clips > figure,
+.btn-row > .btn {
+  min-width: 0;
 }
 
 section {
@@ -226,13 +246,13 @@ section {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
 @media (width >= 640px) {
   .steps {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -254,7 +274,7 @@ section {
   color: #fff;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 0.9375rem;
   margin-bottom: 10px;
 }
 
@@ -264,14 +284,14 @@ section {
 
 .steps p {
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--color-muted-foreground);
 }
 
 .section-kicker {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -280,14 +300,14 @@ section {
 }
 
 .section-lead {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: var(--color-muted-foreground);
   max-width: 640px;
   margin-bottom: 28px;
 }
 
 .small {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--color-muted-foreground);
 }
 
@@ -302,12 +322,18 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   min-height: 48px;
-  padding: 0 26px;
+  padding: 0 1.625rem;
   border-radius: 999px;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
+
+  /* Phone numbers and long labels must wrap at 200%/300% zoom rather than
+     forcing the hero grid or header wider than the viewport. */
+  overflow-wrap: anywhere;
+  white-space: normal;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -360,7 +386,7 @@ section {
 .btn-card {
   min-height: 48px;
   padding: 0 20px;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 10px;
 }
 
@@ -379,7 +405,7 @@ section {
   align-items: center;
   min-height: 44px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--color-primary-dark);
 }
 
@@ -398,6 +424,7 @@ section {
 
 .site-header .wrap {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
@@ -409,14 +436,23 @@ section {
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  flex: 0 1 auto;
   gap: 8px;
+  min-width: 0;
   min-height: 44px;
+  white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 21px;
+  font-size: 1.3125rem;
   letter-spacing: -0.01em;
   text-decoration: none;
   color: var(--color-foreground);
+}
+
+/* Only one wordmark is ever shown. CSS swaps them at the compact breakpoint;
+   the short form stays readable on small phones and the full form on desktop. */
+.logo-short {
+  display: none;
 }
 
 .logo-mark {
@@ -432,7 +468,9 @@ section {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  min-width: 0;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
 }
 
 .site-nav a {
@@ -441,7 +479,7 @@ section {
   min-height: 44px;
   color: var(--color-foreground);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 500;
   padding: 0 12px;
   border-radius: 10px;
@@ -465,31 +503,23 @@ section {
   margin-left: 4px;
 }
 
-/* Narrow screens: drop the anchor nav (the sticky bar carries Call and
-   WhatsApp) so the header stays a single clean row. Placed after the base
-   rules so these declarations win. */
-@media (width <= 639px) {
-  :root {
-    --header-h: 77px;
-  }
-
+/* Compact header below 880px. Section anchors move to the docked bar's icon
+   rail; only the Call CTA may remain here. The header is static in this band,
+   so anchor jumps no longer need a scroll-margin offset. */
+@media (width <= 879px) {
   .site-header {
     position: static;
   }
 
   .site-header .wrap {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    flex-wrap: nowrap;
     gap: 8px;
+    min-height: 56px;
+    padding: 6px calc(12px + env(safe-area-inset-right)) 6px calc(12px + env(safe-area-inset-left));
   }
 
-  .site-header .logo {
-    font-size: 18px;
-  }
-
-  .site-header .logo-mark {
-    width: 30px;
-    height: 30px;
+  section {
+    scroll-margin-top: 0;
   }
 
   .site-nav a:not(.nav-call) {
@@ -497,10 +527,51 @@ section {
   }
 
   .site-nav a.nav-call {
+    min-width: 0;
     min-height: 44px;
-    padding: 0 18px;
-    font-size: 15px;
+    padding: 0 1rem;
+    font-size: 0.9375rem;
     margin-left: 0;
+    white-space: nowrap;
+  }
+}
+
+@media (width <= 639px) {
+  .logo-full {
+    display: none;
+  }
+
+  .logo-short {
+    display: inline;
+  }
+
+  .site-header .logo {
+    font-size: 1.125rem;
+    gap: 6px;
+  }
+
+  .site-header .logo-mark {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Extreme zoom (130/195 CSS px) or very narrow phones: the dock keeps both
+   CTAs persistent, so the header can drop its duplicate Call and tighten the
+   wordmark instead of clipping either control. */
+@media (width <= 279px) {
+  .site-header .logo {
+    font-size: 0.8125rem;
+    gap: 5px;
+  }
+
+  .site-header .logo-mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .site-nav {
+    display: none;
   }
 }
 
@@ -514,19 +585,23 @@ section {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 32px;
   align-items: center;
 }
 
-@media (width >= 820px) {
+.hero-grid > * {
+  min-width: 0;
+}
+
+@media (width >= 640px) {
   .hero-grid {
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   }
 }
 
 .hero-sub {
-  font-size: 18px;
+  font-size: 1.125rem;
   color: var(--color-muted-foreground);
   max-width: 520px;
 }
@@ -539,27 +614,62 @@ section {
    gallery and cost dead markup, so the collage is one image. */
 .hero-collage {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
+  min-width: 0;
 }
 
 .hero-photo {
   margin: 0;
   position: relative;
+  min-width: 0;
 }
 
 .hero-photo picture {
   display: block;
-  height: 100%;
+  width: 100%;
+  height: auto;
+  min-width: 0;
 }
 
 .hero-photo img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+
+  /* vh fallback first; min() keeps tall desktop photos from dominating. */
+  max-height: 52vh;
+  max-height: min(52vh, 420px);
   object-fit: cover;
   border-radius: 14px;
   box-shadow: var(--shadow-lift);
+}
+
+/* Short landscape (e.g. 653x280): compress the two-column hero so it stays
+   within roughly one viewport height instead of scrolling for screens. */
+@media (height <= 520px) and (width >= 640px) {
+  .hero {
+    padding-block: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.375rem, 3.2vw, 1.875rem);
+    margin-bottom: 8px;
+  }
+
+  .hero-sub {
+    font-size: 0.9375rem;
+    margin-bottom: 12px;
+  }
+
+  .btn-row {
+    margin: 12px 0 8px;
+  }
+
+  .hero-photo img {
+    max-height: min(40vh, 220px);
+  }
 }
 
 .hero-photo figcaption {
@@ -569,7 +679,7 @@ section {
   bottom: 12px;
   background: rgb(15 23 42 / 0.82);
   color: #fff;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   padding: 8px 16px;
   border-radius: 10px;
@@ -582,19 +692,19 @@ section {
 /* Services */
 .service-groups {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
 @media (width >= 640px) {
   .service-groups {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (width >= 1000px) {
   .service-groups {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .service-group {
@@ -656,13 +766,26 @@ section {
   stroke-linejoin: round;
 }
 
+/* Forced-colors modes strip the gradient; use system colors so the stroke
+   always contrasts with the icon background in light and dark themes. */
+@media (forced-colors: active) {
+  .service-icon {
+    background: Canvas;
+    border: 1px solid CanvasText;
+  }
+
+  .service-icon svg {
+    stroke: CanvasText;
+  }
+}
+
 .service-group h3 {
-  font-size: 21px;
+  font-size: 1.3125rem;
   margin-bottom: 4px;
 }
 
 .typical {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--color-muted-foreground);
   margin-bottom: 12px;
 }
@@ -679,7 +802,7 @@ section {
   padding-left: 20px;
   margin-bottom: 4px;
   color: var(--color-muted-foreground);
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 
 .service-group li::before {
@@ -702,38 +825,38 @@ section {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
 @media (width >= 480px) {
   .gallery-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (width >= 640px) {
   .gallery-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (width >= 1000px) {
   .gallery-grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 .gallery-feature {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   margin-bottom: 16px;
 }
 
 @media (width >= 640px) {
   .gallery-feature {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -787,7 +910,7 @@ section {
 
 .gallery-feature figcaption,
 .gallery-grid figcaption {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-muted-foreground);
   padding: 10px 12px 12px;
@@ -796,7 +919,7 @@ section {
 /* Clips */
 .clips {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
   max-width: 720px;
   margin-inline: auto;
@@ -804,7 +927,7 @@ section {
 
 @media (width >= 640px) {
   .clips {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -826,7 +949,7 @@ section {
 }
 
 .clips figcaption {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-muted-foreground);
   padding: 12px 16px 14px;
@@ -840,7 +963,7 @@ section {
 
 .contact-section h2 {
   color: #fff;
-  font-size: clamp(34px, 5.6vw, 48px);
+  font-size: clamp(2.125rem, 5.6vw, 3rem);
 }
 
 .contact-section .section-kicker {
@@ -898,7 +1021,7 @@ section {
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--color-border);
-  padding: 28px 0 calc(104px + env(safe-area-inset-bottom));
+  padding: 28px 0;
   background: var(--color-background);
 }
 
@@ -927,7 +1050,7 @@ section {
   min-height: 44px;
   color: var(--color-muted-foreground);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -952,39 +1075,85 @@ section {
   color: var(--color-primary);
 }
 
-/* Sticky bar */
+/* Sticky bar: an edge-to-edge dock below 880px. Row 1 is a one-tap section
+   rail, row 2 keeps Call and WhatsApp in the thumb zone. Safe-area insets are
+   added to the padding so nothing sits under a notch or home indicator. */
 .sticky-bar {
   position: fixed;
-  left: 12px;
-  right: 12px;
-  bottom: calc(12px + env(safe-area-inset-bottom));
+  inset-inline: 0;
+  bottom: 0;
   z-index: var(--z-bar);
-  display: flex;
-  gap: 10px;
-  background: rgb(15 23 42 / 0.98);
-  border-radius: var(--radius);
-  padding: 10px;
-  box-shadow: 0 8px 32px rgb(15 23 42 / 0.35);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  padding: 6px calc(10px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom))
+    calc(10px + env(safe-area-inset-left));
+  background: var(--color-primary-dark);
+  border-top: 1px solid var(--color-inverse-border);
+  box-shadow: 0 -6px 24px rgb(15 23 42 / 0.35);
+  min-width: 0;
+}
+
+.bar-sections,
+.bar-actions {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bar-sections {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.bar-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .sticky-bar a {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 48px;
+  gap: 2px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 3px 2px;
+  border-radius: 8px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 0.6875rem;
+  line-height: 1.1;
+  text-align: center;
   text-decoration: none;
-  border-radius: 10px;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
 .sticky-bar a svg {
   width: 20px;
   height: 20px;
+  flex: none;
+  stroke: currentcolor;
+}
+
+.bar-section {
+  color: var(--color-inverse-text);
+}
+
+.bar-section-label,
+.bar-action-label {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sticky-bar .bar-actions a {
+  flex-direction: row;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 8px;
+  font-size: 1rem;
 }
 
 .sticky-bar .bar-call {
@@ -997,26 +1166,92 @@ section {
   color: #fff;
 }
 
-@media (width >= 640px) {
+/* At extreme zoom the four labels and both CTA words cannot fit side by side.
+   Icons stay visible and accessible names come from each link's aria-label. */
+@media (width <= 279px) {
+  :root {
+    --dock-h: 160px;
+  }
+
   .sticky-bar {
+    gap: 4px;
+    padding-left: calc(6px + env(safe-area-inset-left));
+    padding-right: calc(6px + env(safe-area-inset-right));
+  }
+
+  .bar-sections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bar-section-label,
+  .bar-action-label {
     display: none;
   }
 
-  .site-footer {
-    padding-bottom: 28px;
+  .sticky-bar a svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sticky-bar .bar-actions a {
+    gap: 0;
+    padding: 0;
   }
 }
 
-/* Extra-narrow phones: single column is already the base for the collage
-   and gallery, so only the buttons stack here. */
-@media (width <= 399px) {
-  .btn {
-    width: 100%;
-    justify-content: center;
+@media (width <= 180px) {
+  :root {
+    --dock-h: 72px;
   }
 
+  h1,
+  h2,
+  h3,
+  .service-group li {
+    overflow-wrap: anywhere;
+  }
+
+  .bar-sections {
+    display: none;
+  }
+
+  .sticky-bar .bar-actions a {
+    gap: 2px;
+    padding: 0 2px;
+  }
+
+  .sticky-bar a svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (width >= 880px) {
+  :root {
+    --dock-h: 0px;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  .sticky-bar {
+    display: none;
+  }
+}
+
+/* Through 480px CTA rows use one equal-width track per button so 400–428px
+   viewports no longer produce ragged, unequal pills. */
+@media (width <= 480px) {
   .btn-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
+  }
+
+  .btn-row > .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -1031,6 +1266,7 @@ section {
 
   body {
     background: #fff;
+    padding-bottom: 0;
   }
 
   a[href^="tel"]::after {

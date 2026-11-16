@@ -8,37 +8,102 @@ const CHAT_PATH =
 ---
 
 <nav class="sticky-bar" aria-label="Quick contact">
-  <a class="bar-call" href={PHONE_TEL}>
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
+  <div class="bar-sections">
+    <a class="bar-section" href="#services" aria-label="Go to services">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 3.5l2.1 6.4 6.4 2.1-6.4 2.1L12 20.5l-2.1-6.4L3.5 12l6.4-2.1L12 3.5z" />
+      </svg>
+      <span class="bar-section-label">Services</span>
+    </a>
+    <a class="bar-section" href="#gallery" aria-label="Go to gallery">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" />
+        <path d="M3 17l5-5 4 4 3-3 6 6" />
+        <path d="M15.5 8.5h.01" />
+      </svg>
+      <span class="bar-section-label">Gallery</span>
+    </a>
+    <a class="bar-section" href="#clips" aria-label="Go to clips">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="9" />
+        <path d="M10 8l6 4-6 4V8z" />
+      </svg>
+      <span class="bar-section-label">Videos</span>
+    </a>
+    <a class="bar-section" href="#contact" aria-label="Go to contact">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M4 6h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1z" />
+        <path d="M3 7l9 6 9-6" />
+      </svg>
+      <span class="bar-section-label">Contact</span>
+    </a>
+  </div>
+  <div class="bar-actions">
+    <a class="bar-call" href={PHONE_TEL} aria-label="Call St. Mary’s Painting Works">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d={PHONE_PATH} />
+      </svg>
+      <span class="bar-action-label">Call</span>
+    </a>
+    <a
+      class="bar-wa"
+      href={waLink("Hi St. Mary’s Painting Works, I need a painter in ____.")}
+      target="_blank"
+      rel="noopener"
+      aria-label="WhatsApp St. Mary’s Painting Works"
     >
-      <path d={PHONE_PATH} />
-    </svg>
-    Call
-  </a>
-  <a
-    class="bar-wa"
-    href={waLink("Hi St. Mary’s Painting Works, I need a painter in ____.")}
-    target="_blank"
-    rel="noopener"
-  >
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <path d={CHAT_PATH} />
-    </svg>
-    WhatsApp
-  </a>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d={CHAT_PATH} />
+      </svg>
+      <span class="bar-action-label">WhatsApp</span>
+    </a>
+  </div>
 </nav>
