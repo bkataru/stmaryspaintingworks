@@ -107,4 +107,7 @@ change, then rebuild.
 - The short wordmark is `St. Mary’s Painting Works`; the full legal name is
   `St. Mary’s Painting Works & Home Repairs`.
 - The site states "Since 1980" and publishes no other years figure.
+- Responsive breakpoints, audit evidence and final verification results are in
+  `docs/responsive_audit.md`; preserve the 640px and 880px layout contract when
+  editing CSS.
 - No forms, prices, booking, payments, CMS, backend, login or trackers.
