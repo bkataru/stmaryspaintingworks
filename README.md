@@ -48,7 +48,7 @@ All nine must pass before a publish.
 | HTML5 conformance | `npm run validate:html` | Exits 0; no html-validate errors. |
 | CSS rules | `npm run lint:css` | Exits 0; no stylelint errors. |
 | Formatting | `npx prettier --check "src/**/*.{astro,ts,css}"` | Exits 0; no unformatted files. |
-| Weight and freshness budget | `npm run lint:weight` (runs `python scripts/check-weight.py`) | First view <= 250 KB (HTML + CSS + preloaded fonts + hero WebP); every image <= 150 KB; every clip <= 3 MB; every gallery entry has a JPEG plus four WebP rungs; no stray WebP in `public/gallery/`. |
+| Weight and freshness budget | `npm run lint:weight` (runs `python scripts/check-weight.py`) | First view <= 250 KiB / 256,000 bytes (HTML + CSS + preloaded fonts + hero WebP); every image <= 150 KB; every clip <= 3 MB; every gallery entry has a JPEG plus four WebP rungs; no stray WebP in `public/gallery/`. |
 | Brand whitelist | `npm run check:brand` (runs `python scripts/check-brand.py`) | Exits 0; no legacy brand strings and no unwhitelisted name variants remain. |
 | Contact links | Count `tel:` and `wa.me` in `dist/index.html` | At least 7 `tel:` links and at least 11 `wa.me` links. |
 

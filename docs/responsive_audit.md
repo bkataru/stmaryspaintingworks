@@ -123,3 +123,7 @@ All findings were independently refuted and survived. The following changes are 
 - Manifest reports `standalone`, iOS capable meta present, no client JS added.
 - Any section reachable from the bottom bar in one tap.
 - All colors still meet WCAG AA in normal, forced, and dark modes; all touch targets ≥44px; all project gates remain green.
+
+## Final status
+
+Shipped at commit `f61f8a0` and verified on production. The RED suite failed at 15 states before the fix; the same suite passes at 130, 195, 280, 320, 390, 414, 640, 653×280, 768, 819, 880, and 1920 CSS px. Header height is 57px below 880px and 65px above; body clearance equals the dock height at every width (160px at extreme zoom, 112px on phones and tablets, 0px on desktop). The production HTML hash matches `dist/index.html`, the manifest reports `display: standalone`, and all nine project gates pass. No service worker or client JavaScript was added; offline launch is outside the static-only constraint.
