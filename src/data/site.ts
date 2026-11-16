@@ -150,7 +150,6 @@ export const GALLERY: GalleryEntry[] = [
     caption: "Third-floor exterior, painter at work",
     width: 750,
     height: 1000,
-    hero: true,
   },
   {
     file: "local-interior-ceiling-01.jpg",
@@ -195,7 +194,6 @@ export const GALLERY: GalleryEntry[] = [
     caption: "Apartment block under construction",
     width: 900,
     height: 1200,
-    hero: true,
   },
   { file: "jd-materials-01.jpg", caption: "Paints and rollers on site", width: 900, height: 1200 },
   {

@@ -117,7 +117,7 @@ html {
 
 ::selection {
   background: var(--color-selection);
-  color: #fff;
+  color: var(--color-primary-dark);
 }
 
 body {
@@ -875,6 +875,15 @@ section {
   color: var(--color-inverse-link);
 }
 
+/* Inline CTA links (Get directions / JustDial / See references) must meet the
+   same 44px touch target as .cta-links a. inline-flex keeps them flowing inline
+   alongside the .link-sep spans. */
+.contact-card p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* Separator between inline links. A styled span, not a bare text node:
    Astro strips inter-element whitespace, which glued the dots to the
    links. Spacing here survives any minifier. */
@@ -925,6 +934,22 @@ section {
   .site-footer nav a:hover {
     color: var(--color-primary);
   }
+}
+
+/* Small-print footer links (e.g. the phone link) inherit the gold global
+   anchor color, which fails AA on the light footer. Scope them to primary blue
+   on every state and give them a 44px touch target without touching `a`. */
+.site-footer p.small a {
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-footer p.small a:hover,
+.site-footer p.small a:focus,
+.site-footer p.small a:focus-visible {
+  color: var(--color-primary);
 }
 
 /* Sticky bar */
