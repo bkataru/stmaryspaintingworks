@@ -45,33 +45,33 @@
 }
 
 :root {
-  --color-primary: #c2410c;
+  --color-primary: #012b7e;
   --color-on-primary: #fff;
-  --color-primary-dark: #9a3412;
-  --color-secondary: #f97316;
-  --color-accent: #2563eb;
-  --color-background: #fff7ed;
-  --color-foreground: #0f172a;
+  --color-primary-dark: #0b1f3a;
+  --color-secondary: #0a4fa8;
+  --color-accent: #f0a010;
+  --color-background: #f7f9fc;
+  --color-foreground: #0b1f3a;
   --color-card: #fff;
-  --color-muted: #fdf4f0;
-  --color-muted-foreground: #475569;
-  --color-border: #c08050;
-  --color-border-strong: #a86a44;
-  --color-ring: #1d4ed8;
+  --color-muted: #eef3fb;
+  --color-muted-foreground: #42526b;
+  --color-border: #c7d5ea;
+  --color-border-strong: #91a9cc;
+  --color-ring: #0a4fa8;
   --color-wa: #1f7a34;
   --color-wa-dark: #166534;
-  --color-inverse: #0f172a;
-  --color-inverse-card: #1b2432;
-  --color-inverse-border: #33415a;
+  --color-inverse: #0b1f3a;
+  --color-inverse-card: #122552;
+  --color-inverse-border: #25417c;
   --color-inverse-text: #e2e8f0;
   --color-inverse-lead: #cbd5e1;
   --color-inverse-small: #94a3b8;
-  --color-inverse-kicker: #fb923c;
-  --color-inverse-link: #93c5fd;
-  --color-kicker: #9a3412;
-  --color-selection: #c2410c;
-  --shadow-primary: 0 4px 14px rgb(194 65 12 / 0.35);
-  --shadow-primary-lift: 0 6px 20px rgb(194 65 12 / 0.4);
+  --color-inverse-kicker: #f0a010;
+  --color-inverse-link: #f0a010;
+  --color-kicker: #0a4fa8;
+  --color-selection: #f0a010;
+  --shadow-primary: 0 4px 14px rgb(1 43 126 / 0.32);
+  --shadow-primary-lift: 0 6px 20px rgb(1 43 126 / 0.4);
   --shadow-wa: 0 4px 14px rgb(31 122 52 / 0.3);
   --shadow-wa-lift: 0 6px 20px rgb(31 122 52 / 0.35);
   --header-h: 64px;
@@ -406,10 +406,10 @@ section {
 
 .logo {
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 2px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
   min-height: 44px;
   font-family: var(--font-display);
   font-weight: 800;
@@ -421,15 +421,11 @@ section {
 
 .logo-mark {
   display: block;
-  width: 72px;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary) 0 55%,
-    var(--color-secondary) 55% 80%,
-    var(--color-wa) 80% 100%
-  );
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: contain;
 }
 
 .site-nav {
@@ -492,8 +488,8 @@ section {
   }
 
   .site-header .logo-mark {
-    width: 60px;
-    height: 5px;
+    width: 30px;
+    height: 30px;
   }
 
   .site-nav a:not(.nav-call) {

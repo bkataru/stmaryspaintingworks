@@ -51,4 +51,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://jaypainters.surge.sh/sitemap.xml
+Sitemap: https://stmaryspaintingworks.pages.dev/sitemap.xml

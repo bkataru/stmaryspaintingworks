@@ -20,13 +20,20 @@ export const LAT = 12.972696;
 export const LNG = 77.626606;
 export const MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=12.972696,77.626606";
 export const JUSTDIAL_URL =
-  "https://www.justdial.com/Bangalore/Jay-Painters-Near-Football-Ground-Ulsoor/080PXX80-XX80-261007120204-I2A4_BZDET";
+  "https://www.justdial.com/Bangalore/St-Marys-Jay-Painters-Home-Repairs-Near-Football-Ground-Ulsoor/080PXX80-XX80-261007120204-I2A4_BZDET";
 export const LAST_VERIFIED = "2026-11-07";
 
-export const HEAD_TITLE = "House painters in Ulsoor, Bangalore | Jay Painters";
+export const BRAND_SHORT = "St. Mary’s Painting Works";
+export const BRAND_LEGAL = "St. Mary’s Painting Works & Home Repairs";
+export const SITE_ORIGIN = "https://stmaryspaintingworks.pages.dev";
+export const OG_IMAGE = "/og.jpg";
+export const OG_IMAGE_ALT =
+  "St. Mary’s Painting Works wordmark with Ulsoor, Bangalore and Since 1980 on navy";
+
+export const HEAD_TITLE = "House painters in Ulsoor, Bangalore | St. Mary’s Painting Works";
 export const SITE_DESCRIPTION =
-  "Painting flats, houses and offices in Ulsoor and Bangalore since 1980. Owner Anthony visits, quotes and runs the crew. Call or WhatsApp.";
-export const THEME_COLOR = "#fff7ed";
+  "Since 1980, painting and home repairs in Ulsoor, Bangalore. Home interiors, patch work, tiling, plumbing, electricals, roof leakage fixing, outside structure work, Deco Paints and Asian and MRF PU polishing. Call or WhatsApp.";
+export const THEME_COLOR = "#0B1F3A";
 
 export interface ServiceGroup {
   title: string;
@@ -39,37 +46,54 @@ export interface ServiceGroup {
 export const SERVICE_GROUPS: ServiceGroup[] = [
   {
     title: "Home interiors",
-    items: ["Living rooms", "Bedrooms", "Walls", "Windows", "Putty", "White wash"],
+    items: [
+      "Living rooms",
+      "Bedrooms",
+      "Walls",
+      "Windows",
+      "Putty",
+      "White wash",
+      "Home repairs",
+      "Patch work",
+      "Tiling",
+      "Plumbing",
+      "Electricals",
+    ],
     typical: "A lived-in flat, repainted room by room",
-    prefill: "Hi Jay Painters, I need interior painting in ____.",
+    prefill: "Hi St. Mary’s, I need interior painting in ____.",
     cta: "Ask about interiors",
   },
   {
     title: "Outside and waterproof",
-    items: ["Exterior walls", "Terrace and leakage painting"],
+    items: [
+      "Exterior walls",
+      "Terrace and leakage painting",
+      "Roof leakage fixing",
+      "Outside structure work",
+    ],
     typical: "A house exterior plus a terrace touch-up",
-    prefill: "Hi Jay Painters, I need exterior or waterproof painting in ____.",
+    prefill: "Hi St. Mary’s, I need exterior or waterproof painting in ____.",
     cta: "Ask about waterproofing",
   },
   {
     title: "Decorative",
-    items: ["3D", "Texture", "Deco finishes", "Spray", "Statue and idol repainting"],
+    items: ["3D", "Texture", "Deco finishes", "Spray", "Statue and idol repainting", "Deco Paints"],
     typical: "One feature wall with a new finish",
-    prefill: "Hi Jay Painters, I need decorative painting in ____.",
+    prefill: "Hi St. Mary’s, I need decorative painting in ____.",
     cta: "Ask about a feature wall",
   },
   {
-    title: "Wood and polish",
-    items: ["Doors", "Furniture", "PU polish", "Polish"],
+    title: "Wood, PU and polish",
+    items: ["Doors", "Furniture", "PU polish", "Polish", "Asian PU polishing", "MRF PU polishing"],
     typical: "Doors and frames in PU or classic polish",
-    prefill: "Hi Jay Painters, I need wood polish work in ____.",
+    prefill: "Hi St. Mary’s, I need wood polish work in ____.",
     cta: "Ask about wood polish",
   },
   {
     title: "Buildings and workplaces",
     items: ["Apartments", "Buildings", "Offices"],
     typical: "A crew assigned to one building or floor",
-    prefill: "Hi Jay Painters, I need painting for a building in ____.",
+    prefill: "Hi St. Mary’s, I need painting for a building in ____.",
     cta: "Ask about a building",
   },
 ];
@@ -174,6 +198,14 @@ export const GALLERY: GalleryEntry[] = [
     hero: true,
   },
   { file: "jd-materials-01.jpg", caption: "Paints and rollers on site", width: 900, height: 1200 },
+  {
+    file: "local-scaffold-painter-01.jpg",
+    caption: "Painter on a scaffold painting an exterior wall",
+    width: 864,
+    height: 1152,
+    hero: false,
+    featured: true,
+  },
 ];
 
 export interface ClipEntry {

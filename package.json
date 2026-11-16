@@ -1,5 +1,5 @@
 {
-  "name": "jaypainters",
+  "name": "stmaryspaintingworks",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,6 +10,8 @@
     "lint:html": "htmlhint dist/index.html dist/404.html",
     "validate:html": "html-validate dist/index.html dist/404.html",
     "lint:css": "stylelint \"src/styles/*.css\"",
+    "lint:weight": "python scripts/check-weight.py",
+    "check:brand": "python scripts/check-brand.py",
     "format": "prettier --write \"src/**/*.{astro,ts,css}\""
   },
   "dependencies": {

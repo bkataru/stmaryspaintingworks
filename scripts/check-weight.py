@@ -83,7 +83,23 @@ try:
             total += os.path.getsize(os.path.join(DIST, "_astro", f))
     for f in preloaded:
         total += os.path.getsize(os.path.join(DIST, "fonts", f))
-    total += os.path.getsize(os.path.join(DIST, "gallery-webp", "hero-finished-exterior.webp"))
+    # The first-view hero follows the GALLERY entry flagged hero: true.
+    with open(os.path.join(ROOT, "src", "data", "site.ts"), encoding="utf8") as fh:
+        hero_src = fh.read()
+    hero_match = re.search(r"export const GALLERY: GalleryEntry\[\] = \[(.*?)\];", hero_src, re.S)
+    hero_file = None
+    if hero_match:
+        for entry in re.findall(r"\{([^{}]*)\}", hero_match.group(1)):
+            if re.search(r"\bhero:\s*true\b", entry):
+                fm = re.search(r'file:\s*"([^"]+)"', entry)
+                if fm:
+                    hero_file = fm.group(1)
+                    break
+    if hero_file:
+        hero_webp = hero_file.replace(".jpg", "") + ".webp"
+        total += os.path.getsize(os.path.join(DIST, "gallery-webp", hero_webp))
+    else:
+        fail("could not find a GALLERY entry with hero: true in site.ts")
     print(f"first-view total {total} bytes")
     if total > FIRST_VIEW_MAX:
         fail(f"first-view total {total} bytes (max {FIRST_VIEW_MAX})")

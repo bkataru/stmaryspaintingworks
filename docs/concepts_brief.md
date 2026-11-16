@@ -1,118 +1,107 @@
-# Jay Painters Static Site
+# St. Mary's Painting Works & Home Repairs — rebrand, redesign and hosting migration
 
 * **Author:** bkataru
-* **Date:** 2026-11-07
+* **Date:** 2026-11-16
 
 ## Overview
 
-One-page-first static site for Jay Painters, Ulsoor, Bangalore. Owner: Anthony Jayasheelan. In business since 1980. Serves homes and commercial sites in Bangalore, travels to Chennai / Hyderabad on request.
+The existing site is a one-page lead generator for a painter in Ulsoor, Bangalore. It earns calls through phone and WhatsApp links only. Anthony Jayasheelan, the owner, no longer wants the name "Jay Painters" used because he treats "jay" as unlucky. His Google Business Profile was created today under the name "St. Mary's Painting Works & Home Repairs", taken from a name he used early in his career. The website, GitHub repository and hosting must be brought in line with that name, and the whole site must be redesigned around the new logo.
 
-The only job of the site is to turn a phone visitor into a call or WhatsApp chat on +91 97316 70742. No forms. No prices. No backend. English only for now, built so Kannada and other languages can be added later. Built in Astro, output to `dist/`, hosted free on Surge.sh at `jaypainters.surge.sh` from public repo `github.com/bkataru/jaypainters`.
-
-What the visitor gets: who this is, what work they do (grouped so it reads fast), proof (merged photo gallery + short compressed clips), how to reach them (tap-to-call, tap-to-WhatsApp with prefilled text), where they are (address, hours 07:00–21:00, map link from 12.972696,77.626606).
+The site stays a static Astro build with no forms, prices, booking, backend, client JavaScript or trackers. A call or a WhatsApp message is the only way to contact the business.
 
 ## Analysis (critique first)
 
-### 1. The 47-year claim does not add up and sits at the top of the page
-JustDial shows "47 Years in Business" and the hypothesis repeats "prominent 47-years claim", but 1980 to November 2026 is 46 years. A wrong number in the hero destroys trust for a trade business that sells on trust.
+### 1. Surge blocks indexing completely
+Surge force-serves `User-agent: * Disallow: /` on all `*.surge.sh` subdomains. Our robots file never reaches crawlers. Cloudflare Pages serves `robots.txt`, `sitemap.xml` and `llms.txt` correctly on `*.pages.dev`, and preview deployments get `X-Robots-Tag: noindex` automatically. Moving to `stmaryspaintingworks.pages.dev` fixes indexing without buying a domain.
 
-Fix: lead with "Since 1980", compute years from the date ("46 years" today) in code so it never goes stale. Keep JustDial's wording off the site. Owner agreed to this fix in brainstorm iteration.
+### 2. A partial rebrand would be worse than none
+"Jay" appears in about 20 places: WhatsApp prefills in seven components, schema name, `og:site_name`, SEO title, header and footer wordmarks, `llms.txt`, repo name and URLs. Changing only the visible heading leaves stale brand strings in metadata and messages, which confuses both people and crawlers. Every brand reference must change in one pass from `src/data/site.ts`.
 
-### 2. The site will be too heavy for the phones it targets unless video is cut hard
-Two WhatsApp videos total ~59 MB. On a cheap Android phone on mobile data that is a dead page. Surge.sh serves files as-is — no resizing, no transcoding, no image CDN. Phone-first and 60 MB of video cannot both be true.
+### 3. The new services are a deliberate scope expansion
+The Google listing names work the old site never offered: home repairs, roof leakage fixing, patch work, tiling, plumbing, electricals, Asian and MRF PU polishing, Deco Paints and outside structure work. These must appear on the site if Google, JustDial and the site are to agree. No prices or localities may be invented for them.
 
-Fix: compress each clip to a short silent loop under ~2–3 MB (720p max, no audio track, poster image, lazy load, tap to play, never autoplay with sound). Done for launch: `assets/video/ceiling-painting-clip.mp4` (12s, 480x864, 345 KB, worker painting ceiling from scaffold) and `assets/video/wood-polish-clip.mp4` (12s, 480x864, 671 KB, Anthony masking wood frames for polish work), each with a JPG poster in `assets/posters/`. Source videos (43 MB + 19 MB) stay out of the shipped build. Photos also need_resize and compress before they go in the repo — 33 source photos (16 local + 17 JustDial) with duplicates will bloat the build fast.
+### 4. The Google Sunday hours are a form artifact
+The Google listing says Sunday Closed because its form cannot express occasional Sunday work. The real schedule is 7 AM to 9 PM every day. The site states the real schedule; the Google entry stays as the owner set it.
 
-### 3. One phone number is the whole business — the site has no backup plan
-Personal number = business number. If the owner is on a ladder, in a no-signal basement, or gets spam from having the number in a public repo, leads stop. No form is fine, but then the call/WhatsApp path must work every time.
+### 5. The logo is an accent, not the primary mark
+The logo is a detailed blue-and-gold portrait of Mary with a halo. The owner chose a text wordmark with the logo as a smaller accent beside it. Its colors drive the new palette: deep blue, gold, light neutral surfaces. The warm orange palette is removed.
 
-Fix: `tel:+919731670742` everywhere, `wa.me/919731670742` with a short prefilled message per section (e.g. "Hi Jay Painters, I need interior painting in ___"). Sticky bottom bar on mobile with Call + WhatsApp always visible. Add hours ("7 AM–9 PM") next to the buttons so people know when to expect an answer. Number is already public on JustDial, so repo exposure adds little new risk, but do not add any second number or email that is not answered.
+### 6. One phone number is still the whole business
+Personal number equals business number. No form is wanted, so the call and WhatsApp paths must work everywhere: header, hero, services, gallery, steps, clips, contact, sticky bar and 404. Prefilled WhatsApp text must use the new brand name and stay short enough for a phone.
 
-### 4. The service list as given confuses a new visitor
-Current raw list mixes rooms (living/bedroom), coatings (Asian Paints, Deco, spray, texture, 3D, deco), prep (putty, white wash, wood/polish), problems (waterproof, window/wall), statues, and customer types (residential, buildings/malls/corporate). A homeowner will not know where they fit.
+### 7. Legacy files are debt
+The old design draft, review reports, JustDial HTML dump and Surge deployment notes describe a brand and host that no longer exist. Keeping them invites stale instructions. They are deleted; the README and this brief are rewritten.
 
-Fix: group into 4–5 plain buckets and say who each is for. Proposed grouping:
-- Home interiors — living room, bedroom, putty, wall, window, white wash
-- Outside + waterproof — exterior walls, terrace / leakage-related painting
-- Decorative — 3D, texture, Deco / design finishes, spray, statue
-- Wood + polish — doors, furniture, polish work
-- Buildings + workplaces — apartments, buildings, malls, offices
-Keep brand mentions ("works with Asian Paints" style) as one line, not a category, unless there is a dealer certificate to show.
+## Confirmed facts
 
-### 5. Gallery merge hides a rights and duplication problem
-16 local images vs 17 JustDial photos overlap. Some JustDial images are low-resolution catalogue shots. Pulling them straight into the repo risks duplicates, blurry tiles, and unclear ownership.
+- **Canonical business name:** St. Mary's Painting Works & Home Repairs
+- **Short display name:** St. Mary's Painting Works
+- **Wordmark:** a text wordmark, with the logo used as a smaller accent beside it. The logo is not the primary mark.
+- **Founding year:** 1980. This is correct and stays everywhere. JustDial displays "47 Years in Business", an artifact of its own counting; 1980 to 2026 is 46 elapsed years. The site says only "Since 1980" and never reproduces the JustDial figure.
+- **Owner:** Anthony Jayasheelan. His name and `jaypainterscontractors@gmail.com` cannot change and are not a branding problem.
+- **Phone:** +91 97316 70742. WhatsApp uses the same number.
+- **Address:** #21, Gauthamapuram, Near Football Ground, R H A Penchine Line, Ulsoor, Bangalore-560008, Karnataka. The Google listing renders the same place as 21, R H A, Penchine Line, near Football Ground, Halasuru, Gowthamapuram, Bengaluru, Karnataka 560008.
+- **Opening hours:** 7 AM to 9 PM, all seven days. The Google listing says Sunday Closed only because its form cannot express "open on Sundays when work requires it". The website states the real schedule.
+- **Google Business Profile:** category Painter. Description: "Painting works, Home repairs, Roof leakage fixing, any patch works, tiling, plumbing, electricals, Asian PU polishing, MRF PU polishing, Deco Paints, Outside Structure Work". Media: one new photo of a painter on a scaffold.
+- **JustDial:** the listing was renamed to "St. Mary's Jay Painters & Home Repairs" because JustDial requires the old name to appear as a substring of the new one. Its URL changed to `/Bangalore/St-Marys-Jay-Painters-Home-Repairs-Near-Football-Ground-Ulsoor/080PXX80-XX80-261007120204-I2A4_BZDET`. Only the numeric listing ID is stable.
+- **Logo:** `assets/logo.png`, a blue-and-gold portrait of Mary with a gold halo. It drives the new palette.
+- **New media:** two photos arrived. Keep the painter on a scaffold. Delete the terrace and wall close-up; it was sent by mistake and is not on Google.
 
-Fix: dedupe by eye (perceptual check, not filenames — WhatsApp forwards rename everything). Keep one best copy of each job. Prefer local originals. Compress to web-friendly sizes, cap gallery at ~12–18 strongest images for launch, add the rest later only if they show different work. Give each image a plain caption ("Exterior, Ulsoor") so it reads as proof, not filler.
+## What the site must do
 
-### 6. Text-only logo and English-only are fine for launch, but both need a stub for what comes next
-Text logo keeps cost zero and loads fast, but alone it looks generic among competitors with painted logos. English-only excludes part of the local customer base in Ulsoor.
-
-Fix: style the text logo (fixed type, spacing, one paint-stroke underline or colour block) so it is repeatable, not default browser text. For language, build URL and string structure ready for `/kn/` later, but do not ship half-translated Kannada now. One clean language beats two broken ones.
-
-### 7. Free hosting + public repo + no CMS means updates depend on one maintainer
-Surge free + HTTPS is enough for a static page. Weak point is people, not tech: only bkataru can rebuild and push. Owner cannot edit photos or hours himself. If that handoff is not written down, the site goes stale after the first price or timing change.
-
-Fix: keep the build to two commands (`npm install`, `npm run build`, `surge ./dist jaypainters.surge.sh`), keep content (phone, hours, address, services) in one small file so a future edit is one place, document it in the README.
+- Use the new name in the title, meta description, headings, header, footer, JSON-LD, Open Graph, `llms.txt` and every WhatsApp prefill. Remove "Jay Painters" as a brand reference. Keep the owner's legal name and email as they are.
+- Add the service lines named in the Google description: home repairs, roof leakage fixing, patch work, tiling, plumbing, electricals, Asian PU polishing, MRF PU polishing, Deco Paints and outside structure work. This is an intentional expansion of scope.
+- Redesign the structure, style, presentation and content. Replace the warm orange palette with blue and gold taken from the logo. Keep the phone-first, low-bandwidth, 360px no-scroll constraints.
+- Use the scaffold photo in the gallery. Remove the terrace close-up from source assets.
+- Derive the favicon, apple-touch icon, 192 and 512 pixel icons and the Open Graph image from the logo.
+- Publish at `stmaryspaintingworks.pages.dev` on Cloudflare Pages. There is no `jaypainters.pages.dev`.
+- Rename the GitHub repository from `bkataru/jaypainters` to `bkataru/stmaryspaintingworks`, update its description and topic, and update the local remote.
+- Retire and delete `jaypainters.surge.sh`.
+- Delete legacy design documents, review reports and the JustDial HTML dump. Do not carry them forward. Rewrite the README for the new name and host.
+- Keep all quality gates green: build, `astro check`, HTML lint and validation, CSS lint, Prettier, weight budget and link counts.
 
 ## Goals vs. Non-Goals
 
-* **In-Scope Goals:**
-- Visitor understands in 10 seconds: painter in Ulsoor, since 1980, Bangalore homes + buildings, call or WhatsApp now.
-- Tap-to-call and tap-to-WhatsApp work from every section on a phone, with prefilled WhatsApp text in English.
-- Grouped services (4–5 buckets), merged deduped gallery, address + hours + map link, owner name.
-- Fast on mobile data: compressed images, short muted clips with posters, no framework weight.
-- Astro builds to `dist/`, deploys to Surge.sh free HTTPS from public GitHub repo.
-
-* **Out-of-Scope Non-Goals:**
-- No contact forms, no quote forms, no price lists or per-sq-ft rates.
-- No online booking, no payments, no backend, no CMS, no login.
-- No Kannada / Hindi / Tamil versions yet — structure ready, content later.
-- No image logo design, no brand system beyond styled text.
-- No SEO article section, no blog, no reviews widget (JustDial rating count is thin — do not import it).
-- No email or social links until real handles exist — placeholders stay out of the shipped page.
+* **In-scope goals:** rebrand every public string; redesign palette, layout and content; add the Google-listing services; add the scaffold photo; derive logo assets; move hosting to Cloudflare Pages; rename the repository; remove Surge; delete legacy docs; keep all verification green.
+* **Out-of-scope non-goals:** buying a custom domain; a Kannada or any other translated route; forms, prices, booking, payments, a CMS, a backend, login or trackers; changing the phone number, owner name, email, address or founding year; inventing localities, rates, review counts or claims.
 
 ## Alternatives Weighed
 
-1. Astro static vs plain HTML file vs Next.js.
-Picked Astro: gives component reuse for service cards and gallery plus image handling, still outputs plain static files Surge can serve. Plain HTML would work but repeats header/footer/CTA markup by hand. Next.js adds a server we do not need and complicates free static hosting. Reason: smallest tool that removes duplication without adding runtime.
+- **Keep Surge.sh and buy a custom domain.** Rejected by the author: extra annual cost, and Surge force-serves `Disallow: /` on its own subdomains, so the site cannot be indexed there.
+- **Publish at `jaypainters.pages.dev` first, then move.** Rejected by the author: the "jay" name is unwanted. Only `stmaryspaintingworks.pages.dev` will exist.
+- **Use the logo as the main header and hero mark.** Rejected by the author: a small accent beside a text wordmark fits a phone-first lead generator better.
+- **Keep "Since 1980" out of the new brand.** Rejected by the author: 1980 is the correct founding year.
+- **Vercel or GitHub Pages.** Rejected: Vercel Hobby does not allow commercial sites, and GitHub Pages terms discourage running a business on it and have sitemap fetch problems on `*.github.io`.
+- **Carry the old design documents and review reports forward.** Rejected by the author: legacy debt. Delete them.
 
-2. Surge.sh vs GitHub Pages / Netlify / Vercel / Cloudflare Pages.
-Picked Surge per hypothesis: one-command deploy, free HTTPS, custom subdomain, no account complexity. GitHub Pages is a fair second (free, tied to the repo) but custom 404/HTTPS setup is slightly more fiddly for this maintainer flow. Netlify/Vercel free tiers add forms/previews we will not use. Reason: keep the stated deploy path, document the two commands, revisit only if Surge limits bite.
+## Locked implementation decisions (resolves reviewer objections)
 
-3. Self-host compressed clips vs YouTube embed vs no video.
-Picked short self-hosted muted clips with posters: keeps visitor on the page, no YouTube chrome or tracking weight, works with no backend. YouTube would save bandwidth but shows ads/suggestions and needs third-party embeds on a lean page. No video is the fallback if compression fails. Reason: proof matters for painters, but only if clips stay tiny and lazy-loaded.
+**Names and strings.** The wordmark reads `St. Mary's Painting Works` with a curly apostrophe. The full legal name `St. Mary's Painting Works & Home Repairs` appears in the JSON-LD `name`, `og:title`, the contact section and `llms.txt`. The short name appears in the header, footer, sticky bar and title suffix. "Since 1980" is the only years claim. Never print "47 years" — 1980 to 2026 is 46; JustDial's figure is not copied. Every WhatsApp prefill starts `Hi St. Mary's,` and keeps the existing `____` placeholder and per-section intent. Static `public/404.html`, `public/manifest.webmanifest`, `public/llms.txt`, `public/robots.txt`, `public/sitemap.xml` are hand-edited; they cannot import from `site.ts`.
 
-4. Single long page vs multi-page (services / gallery / contact pages).
-Picked single page with anchor sections for launch: one scroll on a phone, one sticky call bar, fewer files to maintain. Multi-page helps SEO later but splits a thin content set and doubles nav work now. Reason: match the single conversion job; split later only when content grows (e.g. Kannada version, commercial section).
+**JustDial exception.** The string `St-Marys-Jay-Painters-Home-Repairs` in the JustDial URL, and the listing name `St. Mary's Jay Painters & Home Repairs` where quoted, are the only permitted "Jay" survivors alongside the owner's name and email. A brand check greps the repo and expects exactly that whitelist.
 
-5. Tap-to-chat only vs form + chat.
-Picked tap-to-call / tap-to-WhatsApp only: matches how the owner already works (phone = business), zero spam handling, zero backend, prefills give structure without a form. A form would need storage, spam defence, and someone to check inbox — none exists. Reason: do what the owner answers.
+**Palette (hex values from the logo, all pairs measured AA).** Deep navy `#0B1F3A` for text and dark sections; logo blue `#012B7E` for primary buttons; mid blue `#0A4FA8` for hover and links; gold `#F0A010` for rules, badges, focus rings and accent surfaces; light surface `#F7F9FC`; white cards `#FFFFFF`; muted text `#42526B`. Contrast: navy on light 15.66, white on primary blue 12.74, white on mid blue 7.79, navy on gold 7.66, muted on light 7.51. Stylelint does not check contrast, so these values are fixed here and not improvised in components.
 
-6. Full 33-photo gallery vs curated 12–18.
-Picked curated: faster load, less duplication, stronger proof. Full dump buries good work under near-duplicates and blurry catalogue copies. Reason: gallery is evidence, not storage.
+**Logo assets.** `assets/logo.png` is committed. A PIL script `scripts/make-brand-assets.py` produces: `public/favicon.svg` (a simple navy tile with a gold halo ring and the letter "S", legible at 16 px — the portrait itself is not shrunk to icon size); `public/apple-touch-icon.png` 180×180; `public/icon-192.png` and `public/icon-512.png` with the same mark on navy; `public/og.jpg` 1200×630 with the logo, the short name and "Ulsoor, Bangalore · Since 1980" on navy, under 200 KB. `og:image:alt` becomes descriptive of that image and carries no old brand name. The inline data-URI favicon in `Base.astro` is removed.
 
-7. Text logo vs designed image logo vs photo of painted signboard.
-Picked styled text for launch: zero asset cost, crisp on all screens, easy to keep consistent. A photo signboard could beat it on character if a good photo exists — worth testing one hero-header option with the shop photo. Full logo design is deferred. Reason: ship clean, revisit with real artwork.
+**Media.** Only the two new photos in `assets/originals/` are affected: delete `WhatsApp Image 2026-11-16 at 5.01.29 PM.jpeg`; keep `WhatsApp Image 2026-11-16 at 5.01.29 PM (1).jpeg`, resize to longest side 1200 and ≤150 KB, save as `public/gallery/local-scaffold-painter-01.jpg`, add one `GALLERY` entry with an accurate caption, then run `scripts/make-webp.py` to build its four WebP rungs. Existing gallery and clip entries stay. `scripts/check-weight.py` is updated so its hero measurement reads the `hero: true` entry from `site.ts` instead of a retired filename.
+
+**Services.** Keep the five existing `SERVICE_GROUPS` and their structure. Merge the genuinely new Google items into them: Home interiors gains "Home repairs", "Patch work", "Tiling", "Plumbing", "Electricals"; Outside and waterproof gains "Roof leakage fixing" and "Outside structure work"; Decorative gains "Deco Paints"; Wood and polish becomes "Wood, PU and polish" with "Asian PU polishing" and "MRF PU polishing". Keep 3D, texture, spray and statue work where they are. Drop `priceRange` from JSON-LD; no prices are published.
+
+**Host files.** Delete `public/CNAME` (Surge-only). Update `astro.config.mjs` `site` to `https://stmaryspaintingworks.pages.dev`; `public/robots.txt` Sitemap line, `public/sitemap.xml` loc, and all `public/llms.txt` URLs to the same origin. Deploy by direct upload: `npx wrangler pages deploy ./dist --project-name stmaryspaintingworks`. No Git integration, so the repo rename cannot break the webhook. Record build command `npm run build`, output `dist`, and rollback as redeploying a prior Cloudflare deployment. Tag the pre-migration commit before any destructive step.
+
+**Deletion list.** `docs/design_draft.md`, `docs/designs/`, `docs/reviews/` and the top-level `justdial/` dump are deleted. `docs/concepts_brief.md` stays as the single brief. `assets/originals/`, `assets/gallery-locked/`, `assets/justdial/`, `assets/video/`, `assets/posters/` stay as source inputs with provenance. `dist/`, `node_modules/`, `.astro/` stay ignored.
+
+**Gates.** `npm run build`, `npm run check`, `npm run lint:html`, `npm run validate:html`, `npm run lint:css`, `npx prettier --check "src/**/*.{astro,ts,css}"`, `python scripts/check-weight.py`, a repo-wide brand grep against the whitelist, and counts of `tel:` and `wa.me` links in `dist/index.html` at or above the current 7 and 11. Live acceptance: HTTP 200 on `/`, served robots and llms, canonical and sitemap on `pages.dev`, new wordmark in HTML, no `surge.sh` or unwhitelisted `Jay` in `dist/`.
+
+**GitHub.** `gh repo rename stmaryspaintingworks --repo bkataru/jaypainters`, then `gh repo edit bkataru/stmaryspaintingworks --description "Static lead-gen site for St. Mary's Painting Works & Home Repairs, Ulsoor Bangalore painters since 1980. Astro, phone/WhatsApp CTAs, hosted on Cloudflare Pages." --add-topic astro --add-topic static-site`, then `git remote set-url origin https://github.com/bkataru/stmaryspaintingworks.git`. Rename `package.json` `name` to `stmaryspaintingworks`.
+
+**Ordering.** Tag, build all assets and content, run all gates, deploy to Cloudflare, verify live, rename GitHub, tear down `jaypainters.surge.sh` with `npx surge teardown jaypainters.surge.sh` under the existing account, commit and push last. No destructive step happens before live verification.
 
 ## Key Decisions & Staging for Next Steps
 
-Decisions locked for implementation:
-- Phone `+91 97316 70742` as `tel:+919731670742` and `https://wa.me/919731670742?text=<encoded English message>`; per-section prefill text; sticky mobile Call/WhatsApp bar; hours 07:00–21:00 shown beside CTAs.
-- Claim wording: "Since 1980" + computed years; never hard-code "47 years".
-- Service buckets (5 max) as in Analysis §4; brand line kept to one sentence.
-- Gallery: dedupe 33 → keep 12–18, compress, plain captions; videos: max 2 clips, each ≤3 MB, muted, poster, lazy, no autoplay with sound.
-- English only; code paths and strings laid out for `/kn/` later.
-- Text logo with fixed style; no social/email icons until real accounts exist.
-- Content lives in one data file (phone, hours, address, coords, services, gallery list) so non-Astro edits are trivial.
-- Build: Astro → `dist/` → `surge ./dist jaypainters.surge.sh`; README records exact commands and maintainer (bkataru).
-
-Staging:
-- Stage 1 — Skeleton + conversion path: Astro shell, header with text logo, hero with Since-1980 line, sticky Call/WhatsApp bar, footer with address/hours/map link. Verify on a real phone: both buttons work, readable in sunlight, no horizontal scroll.
-- Stage 2 — Services + proof: 5 service buckets with per-bucket WhatsApp prefill, curated gallery grid, compressed clips with posters. Dedupe and compress happen here, not later.
-- Stage 3 — Hardening + handoff: compress audit (page weight budget), dead-link check, no placeholders shipped, README with build/deploy/edit steps, Surge deploy from clean clone. i18n stub verified (adding `/kn/` needs no refactor).
-- Later (not launch): Kannada version, commercial-client section, review/testimonial capture, YouTube move if clips exceed budget, SEO pages per service area.
-
-Biggest risks to watch:
-1. Page weight from photos/video on mobile data — kills the whole lead goal if ignored. Enforce size caps before deploy.
-2. Year-count credibility ("47" vs actual 46) — small text, large trust cost. Compute from 1980.
-3. Single-maintainer updates with no CMS — site rots if only bkataru can change hours or photos. One content file + README is the mitigation.
+1. Freeze the name, facts, service list and locked decisions above. Components import every string from `src/data/site.ts`; the six static `public/` files are edited by hand and verified by grep.
+2. Generate the blue-and-gold brand assets with `scripts/make-brand-assets.py` and apply the fixed hex values to `global.css`, `site.ts`, `manifest.webmanifest` and `404.html`.
+3. Prepare media: delete the bad photo, add the scaffold photo with its WebP ladder, fix the hero measurement in the weight script.
+4. Rewrite components and content, then host files, then delete legacy files.
+5. Run all gates, tag, deploy to Cloudflare Pages, verify the live page, rename the repository, tear down Surge, commit and push.
