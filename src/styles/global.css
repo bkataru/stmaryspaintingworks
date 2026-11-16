@@ -1201,7 +1201,7 @@ section {
 
 @media (width <= 180px) {
   :root {
-    --dock-h: 72px;
+    --dock-h: 160px;
   }
 
   h1,
