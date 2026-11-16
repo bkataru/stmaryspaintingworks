@@ -58,8 +58,8 @@
   --color-border: #c7d5ea;
   --color-border-strong: #91a9cc;
   --color-ring: #0a4fa8;
-  --color-wa: #1f7a34;
-  --color-wa-dark: #166534;
+  --color-wa: #0a4fa8;
+  --color-wa-dark: #012b7e;
   --color-inverse: #0b1f3a;
   --color-inverse-card: #122552;
   --color-inverse-border: #25417c;
@@ -72,8 +72,8 @@
   --color-selection: #f0a010;
   --shadow-primary: 0 4px 14px rgb(1 43 126 / 0.32);
   --shadow-primary-lift: 0 6px 20px rgb(1 43 126 / 0.4);
-  --shadow-wa: 0 4px 14px rgb(31 122 52 / 0.3);
-  --shadow-wa-lift: 0 6px 20px rgb(31 122 52 / 0.35);
+  --shadow-wa: 0 4px 14px rgb(10 79 168 / 0.3);
+  --shadow-wa-lift: 0 6px 20px rgb(10 79 168 / 0.35);
   --header-h: 64px;
   --z-header: 10;
   --z-bar: 20;
@@ -139,8 +139,8 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(32px, 6vw, 52px);
-  font-weight: 800;
+  font-size: clamp(28px, 4.5vw, 40px);
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -392,7 +392,7 @@ section {
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgb(255 247 237 / 0.98);
+  background: rgb(247 249 252 / 0.98);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -508,8 +508,8 @@ section {
 .hero {
   padding: 48px 0 56px;
   background:
-    radial-gradient(600px 300px at 85% -40px, rgb(249 115 22 / 0.14), transparent 70%),
-    radial-gradient(500px 280px at 5% 20%, rgb(37 99 235 / 0.07), transparent 70%);
+    radial-gradient(600px 300px at 85% -40px, rgb(240 160 16 / 0.16), transparent 70%),
+    radial-gradient(500px 280px at 5% 20%, rgb(10 79 168 / 0.08), transparent 70%);
 }
 
 .hero-grid {
@@ -525,18 +525,6 @@ section {
   }
 }
 
-.hero-badge {
-  display: inline-block;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 6px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow-card);
-}
-
 .hero-sub {
   font-size: 18px;
   color: var(--color-muted-foreground);
@@ -545,38 +533,6 @@ section {
 
 .hero-meta {
   margin-bottom: 4px;
-}
-
-.hero-cred {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-  font-size: 16px;
-}
-
-.hero-cred strong {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 800;
-}
-
-.hero-chips {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.hero-chips li {
-  font-size: 13px;
-  font-weight: 600;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 5px 14px;
-  box-shadow: var(--shadow-card);
 }
 
 /* Single hero photo at every width: the two small tiles duplicated the
@@ -937,6 +893,18 @@ section {
   background: var(--color-background);
 }
 
+.footer-brand {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.site-footer .logo-mark {
+  width: 22px;
+  height: 22px;
+}
+
 .site-footer nav {
   display: flex;
   flex-wrap: wrap;
@@ -1015,12 +983,8 @@ section {
 }
 
 /* Extra-narrow phones: single column is already the base for the collage
-   and gallery, so only button and chip density change here. */
+   and gallery, so only the buttons stack here. */
 @media (width <= 399px) {
-  .hero-chips {
-    gap: 6px;
-  }
-
   .btn {
     width: 100%;
     justify-content: center;
