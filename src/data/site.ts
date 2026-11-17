@@ -190,13 +190,13 @@ export const GALLERY: GalleryEntry[] = [
   },
   {
     file: "jd-yellow-exterior-01.jpg",
-    caption: "Exterior repaint, tan and maroon",
+    caption: "Exterior structuring and painting work, new building",
     width: 750,
     height: 1000,
   },
   {
     file: "jd-commercial-scaffold-01.jpg",
-    caption: "Apartment block under construction",
+    caption: "Individual duplex house under work",
     width: 900,
     height: 1200,
   },
