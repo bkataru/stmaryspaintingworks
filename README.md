@@ -12,7 +12,7 @@ Open Graph image.
 
 ## Prerequisites
 
-- Node >= 18, npm >= 9
+- Node >= 22.23.4 (required by Astro 7), npm >= 9
 - Python 3 with Pillow (`PIL`) for the image and brand-asset scripts
 - Wrangler, used on demand through `npx` for deployment (no global install needed)
 
