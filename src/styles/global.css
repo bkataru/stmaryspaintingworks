@@ -657,7 +657,17 @@ section {
 }
 
 .hero-cover img {
-  object-position: 50% 26%;
+  width: auto;
+  aspect-ratio: 720 / 1280;
+  height: auto;
+  max-width: 100%;
+  max-height: min(60vh, 500px);
+  object-fit: contain;
+}
+
+.hero-cover picture {
+  display: flex;
+  justify-content: center;
 }
 
 /* Short landscape (e.g. 653x280): compress the two-column hero so it stays

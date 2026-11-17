@@ -1,4 +1,4 @@
-# Brighten Anthony's face in assets/cover.png and export the web hero JPEG.
+# Brighten Jay's face in assets/cover.png and export the web hero JPEG.
 # Run: python scripts/make-cover.py
 from pathlib import Path
 

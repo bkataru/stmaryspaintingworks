@@ -10,7 +10,7 @@ export const HOURS_SHORT = "7 AM–9 PM";
 export const HOURS_NOTE = "WhatsApp anytime; replies 7 AM–9 PM";
 export const HERO_HOURS = "Open 7 AM–9 PM, every day · WhatsApp anytime";
 
-export const OWNER = "Anthony Jayasheelan";
+export const OWNER = "Jay";
 export const SINCE_YEAR = 1980;
 export const ADDRESS =
   "#21, Gauthamapuram, Near Football Ground, R H A Penchine Line, Ulsoor, Bangalore-560008, Karnataka";
@@ -100,7 +100,7 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
 
 export interface GalleryEntry {
   file: string;
-  caption: string;
+  caption?: string;
   width: number;
   height: number;
   hero?: boolean;
@@ -116,7 +116,7 @@ export const GALLERY: GalleryEntry[] = [
   },
   {
     file: "cover-anthony.jpg",
-    caption: "Anthony with another man",
+    caption: "Jay with another man",
     width: 720,
     height: 1280,
     hero: true,
@@ -141,7 +141,7 @@ export const GALLERY: GalleryEntry[] = [
   },
   {
     file: "local-exterior-building-01.jpg",
-    caption: "Textured exterior wall and window",
+    caption: "Textured exterior wall (metallic royal)",
     width: 864,
     height: 1152,
   },
@@ -172,19 +172,18 @@ export const GALLERY: GalleryEntry[] = [
   },
   {
     file: "local-interior-prep-01.jpg",
-    caption: "Masked frames ready for paint",
+    caption: "Masked frames ready for polish",
     width: 864,
     height: 1152,
   },
   {
     file: "jd-finished-apartments-01.jpg",
-    caption: "Apartment block exterior, near completion",
+    caption: "Individual house exterior, near completion",
     width: 900,
     height: 1200,
   },
   {
     file: "jd-white-building-01.jpg",
-    caption: "Finished white building, exterior",
     width: 900,
     height: 1200,
     featured: true,
@@ -204,7 +203,7 @@ export const GALLERY: GalleryEntry[] = [
   { file: "jd-materials-01.jpg", caption: "Paints and rollers on site", width: 900, height: 1200 },
   {
     file: "local-scaffold-painter-01.jpg",
-    caption: "Painter on a scaffold painting an exterior wall",
+    caption: "Painter on a scaffold fixing cracks in structure wall and corners using Dr Fix",
     width: 864,
     height: 1152,
     hero: false,
@@ -222,12 +221,12 @@ export const CLIPS: ClipEntry[] = [
   {
     file: "ceiling-painting-clip.mp4",
     poster: "ceiling-painting-poster.jpg",
-    caption: "Ceiling repaint, single painter on scaffold",
+    caption: "New building, Birla wall care putty being applied, single painter on scaffold",
   },
   {
     file: "wood-polish-clip.mp4",
     poster: "wood-polish-poster.jpg",
-    caption: "Masking glass before polish, Anthony",
+    caption: "Masking glass before polish, Jay",
   },
 ];
 

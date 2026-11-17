@@ -93,7 +93,7 @@ from the logo. It writes `public/favicon.svg`, `public/apple-touch-icon.png`
 (1200x630, kept under 200 KB). Run it whenever the logo or the brand marks
 change, then rebuild.
 
-`python scripts/make-cover.py` brightens Anthony's face in `assets/cover.png`
+`python scripts/make-cover.py` brightens Jay's face in `assets/cover.png`
 and exports the 720x1280 hero JPEG. Run it whenever the source photo changes.
 Then run `python scripts/make-webp.py` to rebuild the ladder; the cover has a
 per-file quality override so its full-size WebP stays under the first-view
