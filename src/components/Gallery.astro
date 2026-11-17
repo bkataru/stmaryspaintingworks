@@ -38,6 +38,7 @@ function srcset(file: string, width: number): string {
                 type="image/webp"
               />
               <img
+                class={g.contain ? "contain-fit" : undefined}
                 src={`/gallery/${g.file}`}
                 alt=""
                 width={g.width}
@@ -68,6 +69,7 @@ function srcset(file: string, width: number): string {
                 type="image/webp"
               />
               <img
+                class={g.contain ? "contain-fit" : undefined}
                 src={`/gallery/${g.file}`}
                 alt=""
                 width={g.width}

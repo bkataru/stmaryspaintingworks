@@ -922,6 +922,14 @@ section {
   transition: transform var(--transition);
 }
 
+.gallery-feature img.contain-fit,
+.gallery-grid img.contain-fit {
+  object-fit: contain;
+  background: var(--color-muted);
+  padding: 8px;
+  border-radius: var(--radius);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .gallery-feature figure:hover,
   .gallery-grid figure:hover {
