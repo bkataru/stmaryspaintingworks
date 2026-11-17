@@ -202,6 +202,7 @@ export const GALLERY: GalleryEntry[] = [
     height: 1200,
   },
   { file: "jd-materials-01.jpg", caption: "Paints and rollers on site", width: 900, height: 1200 },
+  { file: "asian-paints-apcolite.jpg", width: 418, height: 484 },
   {
     file: "local-scaffold-painter-01.jpg",
     caption:
