@@ -11,9 +11,13 @@ print("jpg count:", len(files))
 LADDER = (320, 480, 720)
 
 before = after = 0
+# The portrait cover needs a lower quality to stay under the first-view budget.
+QUALITY_OVERRIDES = {"cover-anthony": 58}
+
 for src in files:
     name = os.path.basename(src)
     slug = name.replace(".jpg", "")
+    quality = QUALITY_OVERRIDES.get(slug, 78)
     im = Image.open(src).convert("RGB")
     b = os.path.getsize(src)
     full = "public/gallery-webp/" + slug + ".webp"
@@ -22,7 +26,7 @@ for src in files:
         h = round(im.height * w / im.width)
         variants.append((f"public/gallery-webp/{slug}-{w}.webp", im.resize((w, h), Image.LANCZOS)))
     for dest, img in variants:
-        img.save(dest, "WEBP", quality=78, method=4)
+        img.save(dest, "WEBP", quality=quality, method=4)
         a = os.path.getsize(dest)
         if a == 0:
             os.remove(dest)

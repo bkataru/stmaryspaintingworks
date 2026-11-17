@@ -113,6 +113,12 @@ export const GALLERY: GalleryEntry[] = [
     caption: "New exterior paint, Bangalore",
     width: 750,
     height: 1000,
+  },
+  {
+    file: "cover-anthony.jpg",
+    caption: "Anthony with another man",
+    width: 720,
+    height: 1280,
     hero: true,
   },
   {

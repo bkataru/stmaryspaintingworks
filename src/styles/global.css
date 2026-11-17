@@ -646,6 +646,20 @@ section {
   box-shadow: var(--shadow-lift);
 }
 
+@media (width <= 639px) {
+  .hero-grid > div:first-child {
+    order: 2;
+  }
+
+  .hero-collage {
+    order: 1;
+  }
+}
+
+.hero-cover img {
+  object-position: 50% 26%;
+}
+
 /* Short landscape (e.g. 653x280): compress the two-column hero so it stays
    within roughly one viewport height instead of scrolling for screens. */
 @media (height <= 520px) and (width >= 640px) {
