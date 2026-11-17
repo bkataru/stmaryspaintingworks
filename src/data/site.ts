@@ -166,7 +166,7 @@ export const GALLERY: GalleryEntry[] = [
   },
   {
     file: "local-wall-finish-01.jpg",
-    caption: "Living room with feature wall",
+    caption: "Living room with showcase and TV unit",
     width: 864,
     height: 1152,
   },
@@ -203,7 +203,8 @@ export const GALLERY: GalleryEntry[] = [
   { file: "jd-materials-01.jpg", caption: "Paints and rollers on site", width: 900, height: 1200 },
   {
     file: "local-scaffold-painter-01.jpg",
-    caption: "Painter on a scaffold fixing cracks in structure wall and corners using Dr Fix",
+    caption:
+      "Painter on a scaffold fixing cracks in structure wall and corners using Dr Fix (Crack Filler)",
     width: 864,
     height: 1152,
     hero: false,
