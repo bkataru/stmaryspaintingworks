@@ -15,6 +15,8 @@ export const SINCE_YEAR = 1980;
 export const ADDRESS =
   "#21, Gauthamapuram, Near Football Ground, R H A Penchine Line, Ulsoor, Bangalore-560008, Karnataka";
 export const AREA_SHORT = "Ulsoor, Bangalore 560008";
+export const AREA_NOTE =
+  "We work across Bangalore, and Jay and his crews can coordinate and travel to other cities such as Hyderabad or Chennai for work when needed.";
 export const LANDMARK = "Near Football Ground, Ulsoor";
 export const LAT = 12.972696;
 export const LNG = 77.626606;
