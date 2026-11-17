@@ -668,6 +668,9 @@ section {
 .hero-cover picture {
   display: flex;
   justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
 }
 
 /* Short landscape (e.g. 653x280): compress the two-column hero so it stays

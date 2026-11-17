@@ -5,7 +5,7 @@
 
 ## Overview
 
-The existing site is a one-page lead generator for a painter in Ulsoor, Bangalore. It earns calls through phone and WhatsApp links only. Anthony Jayasheelan, the owner, no longer wants the name "Jay Painters" used because he treats "jay" as unlucky. His Google Business Profile was created today under the name "St. Mary's Painting Works & Home Repairs", taken from a name he used early in his career. The website, GitHub repository and hosting must be brought in line with that name, and the whole site must be redesigned around the new logo.
+The existing site is a one-page lead generator for a painter in Ulsoor, Bangalore. It earns calls through phone and WhatsApp links only. The owner, publicly called Jay, no longer wants the old "Jay Painters" business name used. His Google Business Profile was created today under the name "St. Mary's Painting Works & Home Repairs", taken from a name he used early in his career. The website, GitHub repository and hosting must be brought in line with that name, and the whole site must be redesigned around the new logo.
 
 The site stays a static Astro build with no forms, prices, booking, backend, client JavaScript or trackers. A call or a WhatsApp message is the only way to contact the business.
 
@@ -38,7 +38,7 @@ The old design draft, review reports, JustDial HTML dump and Surge deployment no
 - **Short display name:** St. Mary's Painting Works
 - **Wordmark:** a text wordmark, with the logo used as a smaller accent beside it. The logo is not the primary mark.
 - **Founding year:** 1980. This is correct and stays everywhere. JustDial displays "47 Years in Business", an artifact of its own counting; 1980 to 2026 is 46 elapsed years. The site says only "Since 1980" and never reproduces the JustDial figure.
-- **Owner:** Anthony Jayasheelan. His name and `jaypainterscontractors@gmail.com` cannot change and are not a branding problem.
+- **Owner:** Jay in all public copy. His legal name and `jaypainterscontractors@gmail.com` cannot change and are not used as branding.
 - **Phone:** +91 97316 70742. WhatsApp uses the same number.
 - **Address:** #21, Gauthamapuram, Near Football Ground, R H A Penchine Line, Ulsoor, Bangalore-560008, Karnataka. The Google listing renders the same place as 21, R H A, Penchine Line, near Football Ground, Halasuru, Gowthamapuram, Bengaluru, Karnataka 560008.
 - **Opening hours:** 7 AM to 9 PM, all seven days. The Google listing says Sunday Closed only because its form cannot express "open on Sundays when work requires it". The website states the real schedule.
