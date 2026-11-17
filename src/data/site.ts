@@ -222,7 +222,7 @@ export const CLIPS: ClipEntry[] = [
   {
     file: "ceiling-painting-clip.mp4",
     poster: "ceiling-painting-poster.jpg",
-    caption: "New building, Birla wall care putty being applied, single painter on scaffold",
+    caption: "New building, Birla wall care putty being applied",
   },
   {
     file: "wood-polish-clip.mp4",
