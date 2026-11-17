@@ -110,7 +110,8 @@ export interface GalleryEntry {
 export const GALLERY: GalleryEntry[] = [
   {
     file: "hero-finished-exterior.jpg",
-    caption: "New exterior paint, Bangalore",
+    caption:
+      "New building exterior structuring and painting with Asian Paints Apex Ultima (Dust Proof), Bangalore",
     width: 750,
     height: 1000,
   },
